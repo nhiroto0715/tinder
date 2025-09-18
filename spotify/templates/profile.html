@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>あなたのプロフィール</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f0f2f5; padding: 20px; }
+        .profile { max-width: 500px; margin: 0 auto; background-color: white; border-radius: 10px; padding: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; }
+        h2 { color: #1DB954; border-bottom: 2px solid #1DB954; padding-bottom: 5px; }
+        .track { display: flex; align-items: center; margin-bottom: 15px; }
+        .track img { width: 64px; height: 64px; margin-right: 15px; border-radius: 5px; }
+        .track-info h3 { margin: 0; }
+        .track-info p { margin: 5px 0 0; color: #555; }
+        .logout { text-align: center; margin-top: 20px; }
+        a { color: #1DB954; }
+    </style>
+</head>
+<body>
+    <div class="profile">
+        <h1>{{ user.display_name }} さんのプロフィール</h1>
+        <h2>あなたのトップソング</h2>
+        
+        {% for track in top_tracks %}
+        <div class="track">
+            <img src="{{ track.album.images[0].url }}" alt="Album Art">
+            <div class="track-info">
+                <h3>{{ track.name }}</h3>
+                <p>{{ track.artists[0].name }}</p>
+            </div>
+        </div>
+        {% else %}
+            <p>トップソングが見つかりませんでした。</p>
+        {% endfor %}
+
+        <div class="logout">
+            <a href="/logout">ログアウト</a>
+        </div>
+    </div>
+</body>
+</html>
